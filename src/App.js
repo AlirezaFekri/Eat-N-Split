@@ -34,6 +34,10 @@ function App() {
   function HandleShowAddFriendForm() {
     setAddFriendShowForm(i => !i)
   }
+  function HandleAddFriend(newFriend) {
+    setAddFriendShowForm(false);
+    setFreinds(friend => [...friend, newFriend])
+  }
 
 
 
@@ -41,7 +45,7 @@ function App() {
     <div className='app'>
       <div className='sidebar'>
         <FriendList friends={friends} />
-        {addFriendShowForm && <FormAddFriend HandleFriend={setFreinds} setFreinds={setFreinds} showForm={HandleShowAddFriendForm} />}
+        {addFriendShowForm && <FormAddFriend HandleFriend={HandleAddFriend} />}
         <Button setHandler={HandleShowAddFriendForm}>{addFriendShowForm ? "Close" : "Add Friend"}</Button>
       </div>
       {splitBillShowForm && <FormSplitBill friends={friends} setFriends={setFreinds} />}
