@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
+import FriendList from './components/friendList';
+
+
 
 function App() {
   const initialFriends = [
@@ -21,11 +24,15 @@ function App() {
       balance: 0,
     },
   ];
-
+  
 
   return (
-   <>
-   </> 
+    <div className='app'>
+      <div className='sidebar'>
+        <FriendList friends={initialFriends} />
+  
+      </div>
+    </div>
   )
 }
 
