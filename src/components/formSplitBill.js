@@ -4,17 +4,14 @@ import Button from './button'
 function FormSplitBill({ selection, updateFriend }) {
     const [billValue, setBillValue] = useState("");
     const [userExpense, setUserExpense] = useState("");
-    const [paying, setPaying] = useState("you");
+    const [paying, setPaying] = useState("user");
+    const bill = billValue ? billValue - userExpense : "";
 
 
     function HandleSubmitForm(e) {
         e.preventDefault();
-        if (!billValue || !userExpense || billValue < userExpense) return;
-        if (paying === "you") {
-            updateFriend(selection.id, selection.balance + (billValue - userExpense))
-        }else{
-            updateFriend(selection.id, selection.balance + ((billValue - userExpense) * -1))
-        }
+        if (!billValue || !userExpense) return;
+        updateFriend(paying === "user" ? bill : -userExpense)
 
     }
     return (
@@ -26,15 +23,21 @@ function FormSplitBill({ selection, updateFriend }) {
             <label>
                 💰 Bill Value:
             </label>
-            <input type='text' value={billValue} onChange={e => setBillValue(Number(e.target.value))} />
+            <input
+                type='text'
+                value={billValue}
+                onChange={e => setBillValue(Number(e.target.value))} />
             <label>
                 🧍‍♂️ Your expense:
             </label>
-            <input type='text' value={userExpense} onChange={e => setUserExpense(Number(e.target.value))} />
+            <input
+                type='text'
+                value={userExpense}
+                onChange={e => setUserExpense(Number(e.target.value) > billValue ? userExpense : Number(e.target.value))} />
             <label>
                 👫 {selection.name}'s expense:
             </label>
-            <input type='text' value={billValue - userExpense} disabled />
+            <input type='text' value={bill} disabled />
             <label>
                 🤑 Who is paying the Bill?
             </label>

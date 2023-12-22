@@ -44,8 +44,8 @@ function App() {
     setFriendSelected(cur => cur?.id === friend.id ? null : friend)
     setAddFriendShowForm(false)
   }
-  function HandleUpdateFriends(id, balance) {
-    setFreinds(friends.map(item => item.id === id ? {...item, balance: balance} : item))
+  function HandleUpdateFriends(value) {
+    setFreinds(friends.map(item => item.id === friendSelected.id ? {...item, balance: friendSelected.balance + value} : item))
     setFriendSelected(null)
   }
 
