@@ -3,9 +3,10 @@ import Button from './button'
 
 function Friend({ friend, onSelection, selection }) {
 
+    const select = selection?.id === friend.id;
 
     return (
-        <li>
+        <li className={select ? "selected" : ""}>
             <img src={friend.image} alt='profile' />
             <h3>{friend.name}</h3>
             <p className={friend.balance > 0 ? "green" : friend.balance < 0 ? "red" : ""}>
@@ -14,14 +15,13 @@ function Friend({ friend, onSelection, selection }) {
                 {friend.balance < 0 && `You owe ${friend.name} $${Math.abs(friend.balance)}`}
             </p>
             {
-                (selection !== null && selection.id === friend.id) ?
-                    <Button onClick={() => onSelection(null)}>
-                        Cancel
-                    </Button>
-                    :
-                    <Button onClick={() => onSelection(friend)}>
-                        Select
-                    </Button>
+
+                <Button onClick={() => onSelection(friend)}>
+                    {
+                        select ? "Cancel" : "Select"
+                    }
+                </Button>
+
             }
         </li>
     )

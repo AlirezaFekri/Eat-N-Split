@@ -32,13 +32,17 @@ function App() {
 
   function HandleShowAddFriendForm() {
     setAddFriendShowForm(i => !i)
+    if (!addFriendShowForm) {
+      setFriendSelected(null)
+    }
   }
   function HandleAddFriend(newFriend) {
     setAddFriendShowForm(false);
     setFreinds(friend => [...friend, newFriend])
   }
   function HandleSelection(friend) {
-    setFriendSelected(friend)
+    setFriendSelected(cur => cur?.id === friend.id ? null : friend)
+    setAddFriendShowForm(false)
   }
   function HandleUpdateFriends(id, balance) {
     setFreinds(friends.map(item => item.id === id ? {...item, balance: balance} : item))
