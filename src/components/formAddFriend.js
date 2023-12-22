@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from './button'
 
-function FormAddFriend({ setFreinds }) {
+function FormAddFriend({ setFreinds, showForm }) {
 
     const [friendName, setFriendName] = useState("");
     const [friendPic, setFriendPic] = useState(`https://i.pravatar.cc/48?u=${Math.ceil(Math.random() * 99999)}`);
@@ -9,6 +9,7 @@ function FormAddFriend({ setFreinds }) {
         e.preventDefault();
         if (!friendName || !friendPic) return;
         setFreinds(friends => [...friends, { id: Math.ceil(Math.random() * 9999 + 10506), name: friendName, image: friendPic, balance: 0 }]);
+        showForm();
         setFriendName("");
         setFriendPic(`https://i.pravatar.cc/48?u=${Math.ceil(Math.random() * 99999)}`);
     }
